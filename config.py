@@ -17,4 +17,4 @@ class Config:
     TECH_CHAT_ID = os.environ.get('TECH_CHAT_ID')
 
     LIMIT_HISTORY = 1500
-    OFFSET_HISTORY = 100
+    OFFSET_HISTORY = 0

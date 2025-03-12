@@ -6,10 +6,10 @@ import ssl
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message, InputMediaDocument
 
-from bpay.patterns import NEW_APP_PATTERN
+from bpay.patterns import NEW_APP_PATTERN, UPDATE_APP_PATTERN
 
 
-async def parse_new_app(text: str) -> dict | None:
+def parse_new_app(text: str) -> dict | None:
     # Применяем регулярное выражение к тексту
     match = re.fullmatch(NEW_APP_PATTERN, text)
 
@@ -24,13 +24,23 @@ async def parse_new_app(text: str) -> dict | None:
         return None
 
 
-def extract_urls_for_attachment(message: Message, attachment_text="Вложение #1"):
+def parse_update_app(text: str) -> int | None:
+    # Ищем совпадение с шаблоном
+    match = re.match(UPDATE_APP_PATTERN, text)
+
+    if match:
+        return match.group(1)
+    else:
+        return None
+
+
+def extract_urls_for_attachment(message: Message, attachment_text="Вложение #"):
     urls = []
 
     for entity in message.entities:
         if entity.type == MessageEntityType.TEXT_LINK:
             text = message.text[entity.offset: entity.offset + entity.length]
-            if text == attachment_text:  # Проверяем, что текст совпадает
+            if attachment_text in text:  # Проверяем, что текст совпадает
                 urls.append(entity.url)
 
     return urls

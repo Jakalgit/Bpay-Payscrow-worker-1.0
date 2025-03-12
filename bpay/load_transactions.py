@@ -5,7 +5,7 @@ from .handler import handler
 import asyncio
 
 
-async def load_transactions(app: Client, limit=1500):
+async def load_transactions(app: Client):
     history_new_apps = app.search_messages(
         chat_id=Config.BPAY_CHAT_ID,
         query="Заявка на Арбитраж №",
