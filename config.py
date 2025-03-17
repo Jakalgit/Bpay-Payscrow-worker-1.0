@@ -14,7 +14,7 @@ class Config:
     BPAY_BOT_ID = int(os.environ.get('BPAY_BOT_ID'))
     BPAY_CHAT_ID = int(os.environ.get('BPAY_CHAT_ID'))
 
-    TECH_CHAT_ID = os.environ.get('TECH_CHAT_ID')
+    ECOMGATE_CHAT_ID = int(os.environ.get('ECOMGATE_CHAT_ID'))
 
-    LIMIT_HISTORY = 1500
-    OFFSET_HISTORY = 0
+    TECH_BPAY_CHAT_ID = int(os.environ.get('TECH_BPAY_CHAT_ID'))
+    TECH_ECOMGATE_CHAT_ID = int(os.environ.get('TECH_ECOMGATE_CHAT_ID'))
