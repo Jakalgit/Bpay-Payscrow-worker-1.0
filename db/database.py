@@ -25,6 +25,7 @@ def create_tables():
             external_id TEXT NULL UNIQUE,
             chat_id TEXT NOT NULL,
             message_id TEXT NOT NULL,
+            from_bot BOOLEAN NOT NULL,
             provider TEXT NOT NULL
         )
     """)
@@ -32,16 +33,16 @@ def create_tables():
     conn.commit()
     conn.close()
 
-def add_transaction(token, amount, appeal_id, external_id, chat_id, message_id, provider):
+def add_transaction(token, amount, appeal_id, external_id, chat_id, message_id, from_bot, provider):
     """Добавляет новую транзакцию в базу данных."""
     conn = get_connection()
     cursor = conn.cursor()
 
     try:
         cursor.execute("""
-            INSERT INTO transactions (token, amount, appeal_id, external_id, chat_id, message_id, provider) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (token, amount, appeal_id, external_id, chat_id, message_id, provider))
+            INSERT INTO transactions (token, amount, appeal_id, external_id, chat_id, message_id, from_bot, provider) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (token, amount, appeal_id, external_id, chat_id, message_id, from_bot, provider))
         conn.commit()
     except sqlite3.IntegrityError as e:
         print(f"Ошибка добавления транзакции: {e}")

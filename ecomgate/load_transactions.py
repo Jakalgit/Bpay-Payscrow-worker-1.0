@@ -1,12 +1,15 @@
+import asyncio
+
 from pyrogram import Client
 
 from config import Config
 from .handler import handler
 
 
-async def load_transactions(app: Client, limit=0, offset=0):
+async def load_transactions(app: Client, limit=2, offset=0):
     history_new_apps = app.search_messages(
         chat_id=Config.ECOMGATE_CHAT_ID,
+        query="Апелляция по платежу",
         limit=limit,
         offset=offset
     )

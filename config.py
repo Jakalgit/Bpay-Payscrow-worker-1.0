@@ -14,6 +14,7 @@ class Config:
     BPAY_BOT_ID = int(os.environ.get('BPAY_BOT_ID'))
     BPAY_CHAT_ID = int(os.environ.get('BPAY_CHAT_ID'))
 
+    ECOMGATE_BOT_ID = int(os.environ.get('ECOMGATE_BOT_ID'))
     ECOMGATE_CHAT_ID = int(os.environ.get('ECOMGATE_CHAT_ID'))
 
     TECH_BPAY_CHAT_ID = int(os.environ.get('TECH_BPAY_CHAT_ID'))

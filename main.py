@@ -21,7 +21,7 @@ async def main():
     await app.start()
     async for dialog in app.get_dialogs():
         print("Loaded dialog:", dialog.chat.id)
-    # await load_transactions(app)
+    await load_transactions(app)
     await idle()
     await app.stop()
 

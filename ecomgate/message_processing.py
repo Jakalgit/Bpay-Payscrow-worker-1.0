@@ -1,7 +1,12 @@
 import re
 
+from pyrogram import Client
+from pyrogram.types import Message, ReplyKeyboardRemove
 
-def parse_request_message(text: str) -> dict | None:
+from config import Config
+
+
+def parse_user_request_message(text: str) -> dict | None:
     try:
         regex = r"^(\d+)\n([a-zA-Z0-9]+)\n(\d+)$"
 
@@ -18,3 +23,43 @@ def parse_request_message(text: str) -> dict | None:
     except Exception as e:
         print(e)
         return None
+
+
+def parse_bot_request_message(text: str) -> dict | None:
+    try:
+        regex = r"^Апелляция по платежу\nВаш id: ([a-zA-Z0-9]+)\nНаш id: (\d+)\nСумма (\d+) RUB\nЗаявленная сумма (\d+) RUB\nСоздано \d{2}\/\d{2}\/\d{2} \d{2}:\d{2}$"
+
+        match = re.match(regex, text)
+
+        if match:
+            return {
+                "token": match.group(1),
+                "number": match.group(2),
+                "amount": match.group(3),
+            }
+        else:
+            return None
+    except Exception as e:
+        print(e)
+        return None
+
+
+def check_reply_message(text: str):
+    pattern = "Оригинальный pdf файл (на случай если Телеграм при обработке повредил текст)"
+    return pattern in text
+
+
+async def copy_message_to_chat(app: Client, new_caption: str, message: Message):
+    if message.media_group_id:
+        await app.copy_media_group(
+            chat_id=Config.PAYSCROW_CHAT_ID,
+            from_chat_id=Config.ECOMGATE_CHAT_ID,
+            message_id=message.id,
+            captions=new_caption,
+        )
+    else:
+        await message.copy(
+            chat_id=Config.PAYSCROW_CHAT_ID,
+            reply_markup=ReplyKeyboardRemove(),
+            caption=new_caption,
+        )
