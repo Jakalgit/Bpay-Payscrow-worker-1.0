@@ -124,7 +124,7 @@ async def handle_result(app: Client, identifier: str, success: bool):
 
 
 async def handle_result_bot(app: Client, transaction_db: dict, success: bool):
-    message = await app.get_messages(chat_id=Config.BPAY_CHAT_ID, message_ids=transaction_db['message_id'])
+    message = await app.get_messages(chat_id=Config.BPAY_CHAT_ID, message_ids=int(transaction_db['message_id']))
 
     if not message:
         return
