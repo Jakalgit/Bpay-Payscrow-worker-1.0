@@ -3,7 +3,7 @@ from bpay.load_transactions import load_transactions as load_transactions_bpay
 from ecomgate.load_transactions import load_transactions as load_transactions_ecomgate
 import asyncio
 
-LIMIT_ECOMAGATE = 0
+LIMIT_ECOMAGATE = 10
 OFFSET_ECOMGATE = 0
 
 LIMIT_BPAY = 0

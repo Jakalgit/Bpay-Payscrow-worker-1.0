@@ -132,11 +132,20 @@ async def handle_result_bot(app: Client, transaction_db: dict, success: bool):
     if success:
         try:
             await message.click("Обновили, уведомить 🔁")
+            await app.request_callback_answer(
+                chat_id=message.chat.id,
+                message_id=message.id,
+                callback_data=message.reply_markup.inline_keyboard[0][0].callback_data
+            )
         except Exception as e:
             print("Submit appeal:", e)
     else:
         try:
-            await message.click("Отклонить апелляцию ❌")
+            await app.request_callback_answer(
+                chat_id=message.chat.id,
+                message_id=message.id,
+                callback_data=message.reply_markup.inline_keyboard[0][1].callback_data
+            )
         except Exception as e:
             print("Cancel appeal:", e)
 
