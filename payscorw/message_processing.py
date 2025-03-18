@@ -3,6 +3,10 @@ SUCCESS_WORD = """удовлетворена"""
 FAILED_WORD = """отклонена."""
 
 def parse_result_message(text: str) -> dict | None:
+
+    if not text:
+        return None
+
     arr = text.split(' ')
 
     if not (arr[0] == "Апелляция" and arr[2] == "для" and arr[3] == "ордера"):
