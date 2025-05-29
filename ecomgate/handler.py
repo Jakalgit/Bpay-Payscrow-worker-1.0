@@ -6,7 +6,8 @@ from pyrogram.types import Message
 from config import Config
 from db.database import get_transaction_by_token, add_transaction, delete_transaction
 from ecomgate.find_reply_message import find_reply_message
-from ecomgate.message_processing import parse_user_request_message, parse_bot_request_message, copy_message_to_chat
+from ecomgate.message_processing import parse_user_request_message, parse_bot_request_message
+from message_processing import copy_message_to_chat
 
 from enums import Provider
 from payscorw.sending import format_caption
@@ -88,9 +89,9 @@ async def handle_bot_request(app: Client, message: Message) -> bool:
     reply_message = await find_reply_message(app, message.id)
 
     if reply_message:
-        await copy_message_to_chat(app, text, reply_message)
+        await copy_message_to_chat(app, text, reply_message, Config.PAYSCROW_CHAT_ID)
     else:
-        await copy_message_to_chat(app, text, message)
+        await copy_message_to_chat(app, text, message, Config.PAYSCROW_CHAT_ID)
 
     add_transaction(
         data['token'],

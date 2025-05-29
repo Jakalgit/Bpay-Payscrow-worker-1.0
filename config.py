@@ -19,3 +19,7 @@ class Config:
 
     TECH_BPAY_CHAT_ID = int(os.environ.get('TECH_BPAY_CHAT_ID'))
     TECH_ECOMGATE_CHAT_ID = int(os.environ.get('TECH_ECOMGATE_CHAT_ID'))
+
+    ONEWIN_TJS_CHAT_ID = int(os.environ.get('ONEWIN_TJS_CHAT_ID'))
+
+    YUMMY_CHAT_ID = int(os.environ.get('YUMMY_CHAT_ID'))
