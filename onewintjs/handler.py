@@ -18,7 +18,7 @@ async def handler(app: Client, message: Message):
     data = parse_new_request(text)
 
     if data:
-        text = f"{data["token"]}" + (f"\n{data["message"]}" if data["message"] else "")
+        text = f"{data['token']}" + (f"\n{data['message']}" if data['message'] else "")
         await copy_message_to_chat(app, text, message, Config.YUMMY_CHAT_ID)
         await asyncio.sleep(3.1)
         await app.send_reaction(chat_id=Config.ECOMGATE_CHAT_ID, message_id=message.id, emoji="👀")

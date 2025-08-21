@@ -10,9 +10,15 @@ async def copy_message_to_chat(app: Client, new_caption: str, message: Message, 
             message_id=message.id,
             captions=new_caption,
         )
-    else:
+    elif message.caption:
         await message.copy(
             chat_id=to_chat_id,
             reply_markup=ReplyKeyboardRemove(),
             caption=new_caption,
+        )
+    else:
+        await app.send_message(
+            chat_id=to_chat_id,
+            reply_markup=ReplyKeyboardRemove(),
+            text=new_caption
         )
