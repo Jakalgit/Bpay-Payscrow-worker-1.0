@@ -4,7 +4,7 @@ from bpay.handler import handler as bpay_handler
 from config import Config
 from payscorw.handler import handler as payscrow_handler
 from ecomgate.handler import handler as ecomgate_handler
-from onewintjs.hander import handler as onewin_tjs_handler
+from onewintjs.handler import handler as onewin_tjs_handler
 
 handlers = {
     Config.ECOMGATE_CHAT_ID: ecomgate_handler,
